@@ -3,6 +3,11 @@
 - yoshino katsuki
 _ shunya muraoka
 
+- 吉野 克基 (yosshi0774)
+- 堀井 悠司 test（eaponuxoo）
+- 村岡 駿哉（syunyamm）03-171016
+- 住田 裕人（YSumita）
+03-170993
 
 ## コマンド一覧
 ```
