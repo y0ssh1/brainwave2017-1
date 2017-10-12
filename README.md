@@ -1,10 +1,13 @@
-# brainwave2017-1
+## brainwave2017-1
 
 - yoshino katsuki
 
 
-コマンド一覧
+## コマンド一覧
 ```
+# 変更あるたびにとりあえずやるやつ
+git pull origin master
+
 # 今いるとこのファイルとかフォルダとか全部add
 git add .
 
@@ -16,5 +19,4 @@ git push origin ブランチ名（デフォルトならmaster)
 
 # branch名を確認
 git branch
-
 ```
