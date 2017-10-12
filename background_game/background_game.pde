@@ -1,6 +1,7 @@
 //class game_background{
  
  void setup(){
+//   boolean generatebox;
    size(600,450);
    noStroke();
    background(135,206,250);
@@ -16,6 +17,7 @@
     image(groundblock,i*20,410,20,20);
     image(groundblock,i*20,430,20,20);
    }
+   
    
    for(int i=1;i<10;i++){
      float rand=int(random(600));
@@ -35,5 +37,16 @@
      image(kumo,500,80,80,50);
      image(kumo,330,140,80,50);
      image(kumo,50,90,80,50);
+     
+     //float time;
+     //float opponentx;
+     //float opponenty;
  }
+ 
+//void draw(){
+//  opponentx-=1;
+//  opponenty-=1;
+//  fill(0);
+//  stroke(0);
+//}
 //}
