@@ -1,6 +1,9 @@
 ## メンバー
 
-- yoshino katsuki
+- 吉野 克基 (yosshi0774)
+- 堀井 悠司（eaponuxoo）
+- 村岡 駿哉（syunyamm）
+- 住田 裕人（YSumita）
 
 
 ## コマンド一覧
