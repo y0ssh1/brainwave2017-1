@@ -1,4 +1,4 @@
-## brainwave2017-1
+## メンバー
 
 - yoshino katsuki
 
