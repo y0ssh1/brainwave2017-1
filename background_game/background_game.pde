@@ -49,7 +49,7 @@
        jumptime=0;
        playerpos.x=50f;
        enemypos.y=330f;
-       birdpos.y=330f;
+       birdpos.y=280f;
    }
 
   void draw(){
@@ -96,15 +96,15 @@
 
        cycle=move%700;
          playerpos.y=330+playerupper;
-         enemypos.x=(700-cycle)%700;
-         birdpos.x=(800-cycle)%800;
+         enemypos.x=(700-cycle)%700-50;
+         birdpos.x=(1050-cycle)%700-50;
 
-         image(enemy1,(700-cycle)%700,330,20,20);
+         image(enemy1,enemypos.x,330,20,20);
          image(player,50,330+playerupper,20,20);
-         image(bird,(800-cycle)%800,280,20,20);
+         image(bird,birdpos.x,280,20,20);
 
 
-         if(dist(playerpos.x,playerpos.y,enemypos.x,enemypos.y)<20){
+         if((dist(playerpos.x,playerpos.y,enemypos.x,enemypos.y)<20)||(dist(playerpos.x,playerpos.y,birdpos.x,birdpos.y)<20)){
            System.out.println("hit");
            play=false;
 
