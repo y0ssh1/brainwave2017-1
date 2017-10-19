@@ -81,9 +81,9 @@
   
        
        cycle=move%800;
-         image(groundblock,(900-cycle)%800-70,250,20,20);
-         image(hatenablock,(900-cycle)%800-50,250,20,20);
-         image(groundblock,(900-cycle)%800-30,250,20,20);
+         image(groundblock,(1300-cycle)%800-70,250,20,20);
+         image(hatenablock,(1300-cycle)%800-50,250,20,20);
+         image(groundblock,(1300-cycle)%800-30,250,20,20);
          
        cycle=(move/2.0)%800;
          image(kumo,(1460-cycle)%800-100,100,80,50);
@@ -141,6 +141,7 @@
           if(keyCode==RIGHT){
           play=true;
           movetogameover=true;
+          move=0;
         }
         }
         
