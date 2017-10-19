@@ -8,10 +8,13 @@
    PImage kumo;
    PImage mountain;
    PImage player;
+   PImage enemy1;
+   PVector playerpos=new PVector();
+   PVector enemypos=new PVector();
    
    boolean jump;
    float jumptime;
-   float playerpos;
+   float playerupper;
    
    void setup(){
      frameRate(60);
@@ -25,6 +28,8 @@
      kumo=loadImage("kumo.png");
      mountain=loadImage("mountain2.png");
      player=loadImage("player.png");
+     enemy1=loadImage("enemy1.png");
+     
      for(int i=0;i<30;i++){
       image(groundblock,i*20,350,20,20); 
       image(groundblock,i*20,370,20,20);
@@ -34,6 +39,9 @@
      }      
        fill(135,206,250);
        jumptime=0;
+       playerpos.x=50f;
+       enemypos.y=330f;
+       
    }
    
   void draw(){
@@ -68,13 +76,28 @@
        image(hatenablock,(900-cycle)%800-50,250,20,20);
        image(groundblock,(900-cycle)%800-30,250,20,20);
        
-       cycle=(move/2.0)%800;
+     cycle=(move/2.0)%800;
        image(kumo,(1460-cycle)%800-100,100,80,50);
        image(kumo,(1290-cycle)%800-100,80,80,50);
        image(kumo,(1070-cycle)%800-100,140,80,50);
        image(kumo,(800-cycle)%800-100,90,80,50);
+
+     cycle=move%700;
+       playerpos.y=330+playerupper;
+       enemypos.x=(700-cycle)%700;
+     
+       image(enemy1,(700-cycle)%700,330,20,20);
+       image(player,50,330+playerupper,20,20);
        
-       image(player,50,330+playerpos,20,20);
+       
+       if(dist(playerpos.x,playerpos.y,enemypos.x,enemypos.y)<20){
+         System.out.println("hit");
+         
+       }
+       
+       
+       
+       
     if(!jump){
       if(keyPressed){
         if(keyCode==UP){
@@ -85,7 +108,7 @@
     
     if(jump){
       jumptime++;
-      playerpos=0.1*(sq(30-jumptime)-900);
+      playerupper=0.1*(sq(30-jumptime)-900);
       if(jumptime>=60){
         jumptime=0;
         jump=false;
