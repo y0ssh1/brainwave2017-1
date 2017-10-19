@@ -20,6 +20,9 @@
    boolean play;
    boolean movetogameover;
    
+   int highscore;
+   int lastscore;
+   
    void setup(){
      play=true;
      movetogameover=true;
@@ -49,6 +52,9 @@
        playerpos.x=50f;
        enemypos.y=330f;
        speed=3;
+       
+       lastscore=0;
+       highscore=0;
    }
    
   void draw(){
@@ -100,6 +106,7 @@
          
          if(dist(playerpos.x,playerpos.y,enemypos.x,enemypos.y)<20){
            System.out.println("hit");
+           lastscore=int(move/50);
            play=false;
            
          }
@@ -131,11 +138,16 @@
     }
     if(!play){
         if(movetogameover){
+        if(lastscore>highscore){
+          highscore=lastscore;
+        }
         fill(0,0,0);
         rect(0,0,600,450);
         fill(255,0,0);
         textSize(20);
         text("Game Over",width/2,height/3,300,40);
+        text("LastScore:"+lastscore,width/2,height/2,300,40);
+        text("HighScore"+highscore,width/2,height/2+20,300,40);
         text("Push Right to Restart",width/2,height*2/3,300,40);
         movetogameover=false;
         }
