@@ -93,9 +93,9 @@
   
        cycle=move%700;
          playerpos.y=330+playerupper;
-         enemypos.x=(700-cycle)%700;
+         enemypos.x=(700-cycle)%700-50;
        
-         image(enemy1,(700-cycle)%700,330,20,20);
+         image(enemy1,(700-cycle)%700−50,330,20,20);
          image(player,50,330+playerupper,20,20);
          
          
