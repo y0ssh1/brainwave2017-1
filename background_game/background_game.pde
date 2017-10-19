@@ -7,6 +7,12 @@
    PImage hatenablock;
    PImage kumo;
    PImage mountain;
+   PImage player;
+   
+   boolean jump;
+   float jumptime;
+   float playerpos;
+   
    void setup(){
      frameRate(60);
      move=0;
@@ -18,6 +24,7 @@
      hatenablock=loadImage("hatenablock.jpg");
      kumo=loadImage("kumo.png");
      mountain=loadImage("mountain2.png");
+     player=loadImage("player.png");
      for(int i=0;i<30;i++){
       image(groundblock,i*20,350,20,20); 
       image(groundblock,i*20,370,20,20);
@@ -26,6 +33,7 @@
       image(groundblock,i*20,430,20,20);
      }      
        fill(135,206,250);
+       jumptime=0;
    }
    
   void draw(){
@@ -65,7 +73,26 @@
        image(kumo,(1290-cycle)%800-100,80,80,50);
        image(kumo,(1070-cycle)%800-100,140,80,50);
        image(kumo,(800-cycle)%800-100,90,80,50);
+       
+       image(player,50,330+playerpos,20,20);
+    if(!jump){
+      if(keyPressed){
+        if(keyCode==UP){
+        jump=true;
+      }
+      }
     }
-  
+    
+    if(jump){
+      jumptime++;
+      playerpos=0.1*(sq(30-jumptime)-900);
+      if(jumptime>=60){
+        jumptime=0;
+        jump=false;
+      }
+    }
+}
+
+    
 
 //}
