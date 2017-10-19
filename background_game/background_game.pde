@@ -2,6 +2,7 @@
   
    int move;
    float cycle;
+   float speed;
    
    PImage groundblock;
    PImage hatenablock;
@@ -42,20 +43,18 @@
       image(groundblock,i*20,410,20,20);
       image(groundblock,i*20,430,20,20);
      }      
+     
        fill(135,206,250);
        jumptime=0;
        playerpos.x=50f;
        enemypos.y=330f;
-       
+       speed=3;
    }
    
   void draw(){
   
     if(play){
-      move+=2;
-      //textSize(20);
-      //text(String(int(move/20)),20,20,300,40);
-      
+      move+=speed;
       
        fill(135,206,250);
        rect(0,0,600,350);
@@ -124,6 +123,10 @@
           jump=false;
         }
       }
+      fill(0,0,0);
+      textSize(40);
+      text("Score: "+int(move/50),20,40);
+      
       
     }
     if(!play){
