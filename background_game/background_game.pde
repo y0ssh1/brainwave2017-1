@@ -1,8 +1,24 @@
+import oscP5.*;
+import netP5.*;
+
 //class game_background{
   
    int move;
    float cycle;
    
+   int N_CHANNELS = 4;
+   int BUFFER_SIZE = 220;
+   float MAX_MICROVOLTS = 1682.815;
+   
+   final int PORT = 5000;
+   OscP5 oscP5 = new OscP5(this, PORT);
+   
+   float[][] buffer = new float[N_CHANNELS][BUFFER_SIZE];
+   int pointer = 0;
+   float preValue = 0.0;
+   float[] offsetX = new float[N_CHANNELS];
+   float[] offsetY = new float[N_CHANNELS];
+     
    PImage groundblock;
    PImage hatenablock;
    PImage kumo;
@@ -35,6 +51,11 @@
      player=loadImage("player.png");
      enemy1=loadImage("enemy1.png");
      
+     for (int ch = 0; ch < N_CHANNELS; ch++) {
+       offsetX[ch] = (width / N_CHANNELS) * ch + 15;
+       offsetY[ch] = height / 2;
+      }
+     
      for(int i=0;i<30;i++){
       image(groundblock,i*20,350,20,20); 
       image(groundblock,i*20,370,20,20);
@@ -50,7 +71,14 @@
    }
    
   void draw(){
-  
+     float alpha_avg = 0.0;
+     for(int ch = 0; ch < N_CHANNELS; ch++){
+       for(int t = 0; t < BUFFER_SIZE; t++){
+         alpha_avg += buffer[ch][(t+pointer) % BUFFER_SIZE];
+       }
+     }
+     alpha_avg /= N_CHANNELS * BUFFER_SIZE;
+
     if(play){
       move+=2;
       //textSize(20);
@@ -104,16 +132,9 @@
            play=false;
            
          }
-         
-         
-         
-         
-      if(!jump){
-        if(keyPressed){
-          if(keyCode==UP){
+      
+      if(alpha_avg - preValue > 0.2){
           jump=true;
-        }
-        }
       }
       
       if(jump){
@@ -124,7 +145,6 @@
           jump=false;
         }
       }
-      
     }
     if(!play){
         if(movetogameover){
@@ -146,7 +166,20 @@
         }
         
     }
+    preValue = alpha_avg;
     
+}
+
+void oscEvent(OscMessage msg) {
+  float data;
+  if (msg.checkAddrPattern("/muse/elements/alpha_relative")) {
+    for (int ch = 0; ch < N_CHANNELS; ch++) {
+      data = msg.get(ch).floatValue();
+      data = (data - (MAX_MICROVOLTS / 2)) / (MAX_MICROVOLTS / 2); // -1.0 1.0
+      buffer[ch][pointer] = data * 1000;
+    }
+    pointer = (pointer + 1) % BUFFER_SIZE;
+  }
 }
 
     
