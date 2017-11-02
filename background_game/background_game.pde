@@ -133,7 +133,7 @@ import netP5.*;
            
          }
       
-      if(alpha_avg - preValue > 0.2){
+      if(alpha_avg - preValue > 0.2 || (keyPressed && keyCode==UP)){
           jump=true;
       }
       
