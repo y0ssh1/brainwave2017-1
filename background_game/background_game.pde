@@ -35,7 +35,11 @@ import netP5.*;
    boolean play;
    boolean movetogameover;
    
+   int score;
+   int highscore;
+   
    void setup(){
+     highscore=0;
      play=true;
      movetogameover=true;
      frameRate(60);
@@ -81,9 +85,6 @@ import netP5.*;
 
     if(play){
       move+=2;
-      //textSize(20);
-      //text(String(int(move/20)),20,20,300,40);
-      
       
        fill(135,206,250);
        rect(0,0,600,350);
@@ -129,8 +130,8 @@ import netP5.*;
          
          if(dist(playerpos.x,playerpos.y,enemypos.x,enemypos.y)<20){
            System.out.println("hit");
+           score=int(move/20);
            play=false;
-           
          }
       
       if(alpha_avg - preValue > 0.2 || (keyPressed && keyCode==UP)){
@@ -145,15 +146,25 @@ import netP5.*;
           jump=false;
         }
       }
+      fill(0,0,0);
+      textSize(40);
+      text("score: "+str(int(move/20)),20,20,450,60);
+      
     }
     if(!play){
         if(movetogameover){
+        if(score>highscore){
+          highscore=score;
+        }
         fill(0,0,0);
         rect(0,0,600,450);
         fill(255,0,0);
         textSize(20);
-        text("Game Over",width/2,height/3,300,40);
-        text("Push Right to Restart",width/2,height*2/3,300,40);
+        text("Game Over",width/2,height/4,300,40);
+        
+        text("score: "+score+"  highscore: "+highscore,width/2,height/2,300,40);
+        
+        text("Push Right to Restart",width/2,height*3/4,300,40);
         movetogameover=false;
         }
         
